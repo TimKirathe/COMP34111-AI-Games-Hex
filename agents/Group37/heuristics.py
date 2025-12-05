@@ -2,6 +2,7 @@
 
 import heapq
 import random as _random
+import random
 
 from src.Board import Board
 from src.Colour import Colour
@@ -226,7 +227,6 @@ def select_weighted_move(
     sample_size = min(8, len(empty_tiles))
 
     # Get priorities for sampled moves
-    import random
     if len(empty_tiles) <= sample_size:
         candidates = empty_tiles
     else:
