@@ -1,7 +1,6 @@
 """Hex-specific heuristics for MCTS enhancement."""
 
 import heapq
-import random as _random
 import random
 
 from src.Board import Board
@@ -285,7 +284,7 @@ def should_swap(opp_move_x: int, opp_move_y: int, board_size: int = 11) -> bool:
 
 
 # Zobrist hashing for transposition table
-_random.seed(42)  # Deterministic for reproducibility
+random.seed(42)  # Deterministic for reproducibility
 
 ZOBRIST_TABLE: dict[tuple[int, int, Colour], int] = {}
 
@@ -297,7 +296,7 @@ def _init_zobrist(size: int = 11):
     for i in range(size):
         for j in range(size):
             for colour in [Colour.RED, Colour.BLUE]:
-                ZOBRIST_TABLE[(i, j, colour)] = _random.getrandbits(64)
+                ZOBRIST_TABLE[(i, j, colour)] = random.getrandbits(64)
 
 _init_zobrist()
 
