@@ -3,6 +3,7 @@
 
 #include "board.h"
 #include "mcts_node.h"
+#include "transposition_table.h"
 #include <utility>
 #include <vector>
 
@@ -20,7 +21,8 @@ std::pair<int, int> search(
 int simulate_with_heuristics(MCTSNode* node, Colour agent_colour);
 
 // Helper: Backpropagate result up the tree
-void backpropagate(MCTSNode* node, int winner, Colour agent_colour);
+void backpropagate(MCTSNode* node, int winner, Colour agent_colour,
+                   TranspositionTable& tt);
 
 // Helper: Find immediate winning move
 std::pair<int, int> find_winning_move(const Board& board, Colour colour);

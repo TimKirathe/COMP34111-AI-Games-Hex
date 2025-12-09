@@ -14,7 +14,8 @@ public:
     // Constructor
     MCTSNode(const Board& board, Colour player_to_move,
              MCTSNode* parent = nullptr,
-             std::pair<int, int> move = {-1, -1});
+             std::pair<int, int> move = {-1, -1},
+             uint64_t hash = 0);
 
     // Statistics
     int visits;
@@ -28,9 +29,13 @@ public:
     Board board;
     Colour player_to_move;
     std::pair<int, int> move; // Move that led to this node
+    uint64_t zobrist_hash_;
 
     // Untried moves
     std::vector<std::pair<int, int>> untried_moves;
+
+    // Get Zobrist hash
+    uint64_t get_hash() const { return zobrist_hash_; }
 
     // UCB1 calculation
     double ucb1(double exploration_constant = 1.414) const;
@@ -45,7 +50,7 @@ public:
     bool is_terminal() const;
 
     // Expand: add a new child node for an untried move
-    MCTSNode* expand();
+    MCTSNode* expand(std::pair<int, int> preferred_move = {-1, -1});
 
 private:
     // Helper: Get all empty tiles on the board

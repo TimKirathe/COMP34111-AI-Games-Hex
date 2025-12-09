@@ -32,6 +32,7 @@ set(SOURCES
     mcts_node.cpp
     heuristics.cpp
     mcts.cpp
+    transposition_table.cpp
     bindings.cpp
 )
 
